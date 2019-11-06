@@ -4,6 +4,11 @@ stages:
   - runScriptConfig:
       image: maven:3.6.2-jdk-8
       shellScript: mvn clean install
+  when:
+    branch:
+      include:
+      - dev
+      - master
 - name: Publish
   steps:
   - publishImageConfig:
@@ -14,8 +19,29 @@ stages:
       registry: 743018426547.dkr.ecr.us-east-1.amazonaws.com
     env:
       PLUGIN_INSECURE: "true"
+    when:
+      branch:
+        include:
+        - master
+  - publishImageConfig:
+      dockerfilePath: ./Dockerfile
+      buildContext: .
+      tag: rancher-app-sample-dev:${CICD_EXECUTION_SEQUENCE}
+      pushRemote: true
+      registry: 743018426547.dkr.ecr.us-east-1.amazonaws.com
+    when:
+      branch:
+        include:
+        - dev
+  when:
+    branch: {}
 - name: Deploy
   steps:
   - applyYamlConfig:
       path: ./deployment.yaml
+  when:
+    branch:
+      include:
+      - master
 notification: {}
+
