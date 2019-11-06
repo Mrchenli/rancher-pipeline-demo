@@ -4,11 +4,12 @@ stages:
   - runScriptConfig:
       image: maven:3.6.2-jdk-8
       shellScript: mvn clean install
+    when:
+      branch:
+        include:
+        - master
   when:
-    branch:
-      include:
-      - dev
-      - master
+    branch: {}
 - name: Publish
   steps:
   - publishImageConfig:
@@ -30,9 +31,13 @@ stages:
   - applyYamlConfig:
       path: ./deployment.yaml
     when:
-      branch: {}
+      branch:
+        include:
+        - master
   when:
-    branch:
-      include:
-      - master
+    branch: {}
+timeout: 60
+branch:
+  include:
+  - master
 notification: {}
