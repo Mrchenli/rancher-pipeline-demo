@@ -11,6 +11,8 @@ stages:
       dockerfilePath: ./Dockerfile
       buildContext: .
       tag: demoapp:${CICD_EXECUTION_SEQUENCE}
+      pushRemote: true
+      registry: 743018426547.dkr.ecr.us-east-1.amazonaws.com/demorepo
 - name: Deploy
   steps:
   - applyYamlConfig:
