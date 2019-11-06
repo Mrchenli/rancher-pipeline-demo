@@ -40,9 +40,9 @@ stages:
   - applyYamlConfig:
       path: ./deployment.yaml
     when:
-      branch:
-        include:
-        - master
+      branch: {}
   when:
-    branch: {}
+    branch:
+      include:
+      - master
 notification: {}
