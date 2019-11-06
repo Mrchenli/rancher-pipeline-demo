@@ -13,6 +13,8 @@ stages:
       tag: rancher-app-sample:${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
       registry: 743018426547.dkr.ecr.us-east-1.amazonaws.com/rancher-app-sample
+     env:
+      PLUGIN_INSECURE: "true" 
 - name: Deploy
   steps:
   - applyYamlConfig:
