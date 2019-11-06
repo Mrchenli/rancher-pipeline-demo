@@ -23,16 +23,6 @@ stages:
       branch:
         include:
         - master
-  - publishImageConfig:
-      dockerfilePath: ./Dockerfile
-      buildContext: .
-      tag: rancher-app-sample-dev:${CICD_EXECUTION_SEQUENCE}
-      pushRemote: true
-      registry: 743018426547.dkr.ecr.us-east-1.amazonaws.com
-    when:
-      branch:
-        include:
-        - dev
   when:
     branch: {}
 - name: Deploy
