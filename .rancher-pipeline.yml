@@ -10,9 +10,9 @@ stages:
   - publishImageConfig:
       dockerfilePath: ./Dockerfile
       buildContext: .
-      tag: demoapp:${CICD_EXECUTION_SEQUENCE}
+      tag: rancher-app-sample:${CICD_EXECUTION_SEQUENCE}
       pushRemote: true
-      registry: dc-nhhsl
+      registry: 743018426547.dkr.ecr.us-east-1.amazonaws.com/rancher-app-sample
 - name: Deploy
   steps:
   - applyYamlConfig:
